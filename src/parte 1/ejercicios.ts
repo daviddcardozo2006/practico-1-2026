@@ -1,3 +1,4 @@
+
 /**
  * PRÁCTICA 1 - TYPESCRIPT: TIPOS, ARRAYS Y CALLBACKS
  *
@@ -27,7 +28,7 @@ import { alumnos, type Alumno } from "../models/db.js";
 // obtenerNombres(alumnos)
 // -> ["Juan", "María", "Pedro", ...]
 export function obtenerNombres(alumnos: Alumno[]): string[] {
-    // TODO
+    return alumnos.map(alumno => alumno.nombre);
     throw new Error("Implementar");
 }
 
@@ -48,7 +49,7 @@ export function obtenerNombresCompletos(alumnos: Alumno[]): string[] {
 // -----------------------------------------------------------------------------
 // Devolver solamente los alumnos que tengan 18 años o más.
 export function obtenerMayoresDeEdad(alumnos: Alumno[]): Alumno[] {
-    // TODO
+   return alumnos.filter(n => n.edad >18);
     throw new Error("Implementar");
 }
 
@@ -70,7 +71,12 @@ export function obtenerAprobados(alumnos: Alumno[]): Alumno[] {
 //
 // Si el arreglo está vacío, devolver 0.
 export function calcularPromedio(alumnos: Alumno[]): number {
-    // TODO
+    if (alumnos.length === 0) {
+        return 0;
+    }
+
+    const sumaTotal = alumnos.reduce((acc, alumno) => acc + alumno.nota, 0);
+    return sumaTotal / alumnos.length;
     throw new Error("Implementar");
 }
 
@@ -89,11 +95,8 @@ export function obtenerMejorAlumno(alumnos: Alumno[]): Alumno | undefined {
 // -----------------------------------------------------------------------------
 // Buscar un alumno por su número de legajo.
 // Si no existe, devolver undefined.
-export function buscarPorLegajo(
-    alumnos: Alumno[],
-    legajo: number
-): Alumno | undefined {
-    // TODO
+export function buscarPorLegajo(alumnos: Alumno[], legajo: number): Alumno | undefined {
+    return alumnos.find(alumno => alumno.legajo === legajo);
     throw new Error("Implementar");
 }
 
@@ -116,7 +119,7 @@ export function buscarPorNombre(
 // Devolver true si existe al menos un alumno con nota menor a 6.
 // Resolver utilizando some.
 export function existeDesaprobado(alumnos: Alumno[]): boolean {
-    // TODO
+    return alumnos.some(alumno=> alumno.nota < 6)
     throw new Error("Implementar");
 }
 
@@ -136,7 +139,7 @@ export function todosAprobaron(alumnos: Alumno[]): boolean {
 // Devolver la cantidad de alumnos aprobados.
 // Resolver utilizando filter y length.
 export function cantidadAprobados(alumnos: Alumno[]): number {
-    // TODO
+    return alumnos.filter(alumno => alumno.nota >= 6).length;
     throw new Error("Implementar");
 }
 
@@ -154,11 +157,8 @@ export function sumarEdades(alumnos: Alumno[]): number {
 // EJERCICIO 13 - Alumnos de una ciudad
 // -----------------------------------------------------------------------------
 // Devolver los alumnos que pertenezcan a la ciudad recibida.
-export function obtenerAlumnosDeCiudad(
-    alumnos: Alumno[],
-    ciudad: string
-): Alumno[] {
-    // TODO
+export function obtenerAlumnosDeCiudad(alumnos: Alumno[],ciudad: string): Alumno[] {
+    return alumnos.filter(alumno => alumno.ciudad === ciudad);
     throw new Error("Implementar");
 }
 
@@ -186,11 +186,8 @@ export function calcularPromedioPorCiudad(
 // Ejemplo:
 // transformar([1, 2, 3], n => n * 2)
 // -> [2, 4, 6]
-export function transformar<T, R>(
-    elementos: T[],
-    callback: (elemento: T) => R
-): R[] {
-    // TODO
+export function transformar<T, R>(elementos: T[], callback: (elemento: T) => R): R[] {
+    return elementos.map(callback);
     throw new Error("Implementar");
 }
 
@@ -218,11 +215,8 @@ export function filtrar<T>(
 // el criterio indicado por el callback.
 //
 // Si ningún elemento cumple, devolver undefined.
-export function buscar<T>(
-    elementos: T[],
-    callback: (elemento: T) => boolean
-): T | undefined {
-    // TODO
+export function buscar<T>(elementos: T[], callback: (elemento: T) => boolean): T | undefined {
+    return elementos.find(callback)
     throw new Error("Implementar");
 }
 
@@ -235,11 +229,8 @@ export function buscar<T>(
 // Ejemplos:
 // calcularTotal(alumnos, alumno => alumno.edad)
 // calcularTotal(alumnos, alumno => alumno.nota)
-export function calcularTotal(
-    alumnos: Alumno[],
-    callback: (alumno: Alumno) => number
-): number {
-    // TODO
+export function calcularTotal(alumnos: Alumno[], callback: (alumno: Alumno) => number): number {
+    return alumnos.reduce((acc, alumno) => acc + callback(alumno), 0);
     throw new Error("Implementar");
 }
 
@@ -258,10 +249,15 @@ export function calcularTotal(
 // }
 //
 // Resolver utilizando reduce.
-export function agruparPorCiudad(
-    alumnos: Alumno[]
-): Record<string, Alumno[]> {
-    // TODO
+export function agruparPorCiudad(alumnos: Alumno[]): Record<string, Alumno[]> {
+    return alumnos.reduce((acumulador, alumno) => {
+    const { ciudad } = alumno;
+    if (!acumulador[ciudad]) {
+      acumulador[ciudad] = [];
+    }
+    acumulador[ciudad].push(alumno);
+    return acumulador;
+  }, {} as Record<string, Alumno[]>);
     throw new Error("Implementar");
 }
 
@@ -297,18 +293,18 @@ export function obtenerEstadisticas(
 // -----------------------------------------------------------------------------
 // Descomentar estas líneas cuando se hayan implementado las funciones.
 //
-// console.log(obtenerNombres(alumnos).slice(0, 10));
+//console.log(obtenerNombres(alumnos).slice(0, 10));
 // console.log(obtenerNombresCompletos(alumnos).slice(0, 10));
-// console.log(obtenerMayoresDeEdad(alumnos).length);
+//console.log(obtenerMayoresDeEdad(alumnos).length);
 // console.log(obtenerAprobados(alumnos).length);
-// console.log(calcularPromedio(alumnos));
+//console.log(calcularPromedio(alumnos));
 // console.log(obtenerMejorAlumno(alumnos));
-// console.log(buscarPorLegajo(alumnos, 500));
-// console.log(existeDesaprobado(alumnos));
+//console.log(buscarPorLegajo(alumnos, 500));
 // console.log(todosAprobaron(alumnos));
+//console.log(existeDesaprobado(alumnos));
 // console.log(cantidadAprobados(alumnos));
-// console.log(sumarEdades(alumnos));
+console.log(sumarEdades(alumnos));
 // console.log(obtenerAlumnosDeCiudad(alumnos, "Bahía Blanca").length);
 // console.log(calcularPromedioPorCiudad(alumnos, "Bahía Blanca"));
-// console.log(agruparPorCiudad(alumnos));
+console.log(agruparPorCiudad(alumnos));
 // console.log(obtenerEstadisticas(alumnos));
