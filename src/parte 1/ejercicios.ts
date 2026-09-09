@@ -303,7 +303,7 @@ export function obtenerEstadisticas(
 // console.log(todosAprobaron(alumnos));
 //console.log(existeDesaprobado(alumnos));
 // console.log(cantidadAprobados(alumnos));
-console.log(sumarEdades(alumnos));
+//console.log(sumarEdades(alumnos));
 // console.log(obtenerAlumnosDeCiudad(alumnos, "Bahía Blanca").length);
 // console.log(calcularPromedioPorCiudad(alumnos, "Bahía Blanca"));
 console.log(agruparPorCiudad(alumnos));
