@@ -12,8 +12,7 @@
 // -----------------------------------------------------------------------------
 // EJERCICIO 10 - interface Materia
 // -----------------------------------------------------------------------------
-//TODO cambiar a type
-export interface Materia {
+export type Materia = {
     codigo: number;
     nombre: string;
     horas: number;
@@ -38,7 +37,13 @@ export class Alumno {
         edad: number,
         email: string
     ) {
-        // TODO (Ejercicio 8): asignar los atributos recibidos.
+        this.legajo = legajo;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.email = email;
+
+
         throw new Error("Implementar");
     }
 
@@ -47,13 +52,13 @@ export class Alumno {
     // -------------------------------------------------------------------
 
     getNombreCompleto(): string {
-        // TODO
-        throw new Error("Implementar");
+        return this.nombre, this.apellido
+        
     }
 
     esMayorDeEdad(): boolean {
-        // TODO
-        throw new Error("Implementar");
+        return this.edad >= 18
+        
     }
 
     // -------------------------------------------------------------------
@@ -61,14 +66,20 @@ export class Alumno {
     // -------------------------------------------------------------------
 
     getEdad(): number {
-        // TODO
-        throw new Error("Implementar");
+        return this.edad
+        
     }
 
     setEdad(edad: number): void {
         // TODO: debe impedir edades inválidas.
         // edad < 0   -> throw new Error(...)
         // edad > 120 -> throw new Error(...)
+        if (edad <0 || edad >120){
+            throw new Error ("Ingresá una edad válida.")
+        }
+        else{
+            this.edad = edad;
+        }
         throw new Error("Implementar");
     }
 
@@ -77,29 +88,35 @@ export class Alumno {
     // -------------------------------------------------------------------
 
     agregarMateria(materia: Materia): void {
-        // TODO
+        this.materias.push(materia);
         throw new Error("Implementar");
     }
 
     quitarMateria(codigo: number): Materia | undefined {
-        // TODO: quitar la materia con ese código y devolverla.
-        // Si no está inscripto en ninguna con ese código, devolver undefined.
-        throw new Error("Implementar");
+        const indice = this.materias.findIndex(materia => materia.codigo === codigo);
+        if (indice === -1) {
+            return undefined
+        }
+        const materiaEliminada = this.materias[indice]
+        this.materias.splice(indice, 1);
+        return materiaEliminada;
+    
     }
 
     estaInscripto(codigo: number): boolean {
-        // TODO
-        throw new Error("Implementar");
+        return this.materias.some(materia => materia.codigo === codigo);
+        
     }
 
     cantidadMaterias(): number {
-        // TODO
-        throw new Error("Implementar");
+        return this.materias.length
+        
     }
 
     getMaterias(): Materia[] {
         // TODO: devolver las materias sin exponer el arreglo interno
         // (devolver una copia, no la referencia original).
-        throw new Error("Implementar");
+    
+        return [...this.materias];
     }
 }

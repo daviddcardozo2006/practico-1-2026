@@ -30,7 +30,7 @@ export function crearAlumnoInterface(
     edad: number,
     email: string
 ): AlumnoInterface {
-    // TODO
+    return { legajo, nombre, apellido, edad, email };
     throw new Error("Implementar");
 }
 
@@ -52,6 +52,6 @@ export function crearAlumnoType(
     edad: number,
     email: string
 ): AlumnoType {
-    // TODO
+    return { legajo, nombre, apellido, edad, email };
     throw new Error("Implementar");
 }
