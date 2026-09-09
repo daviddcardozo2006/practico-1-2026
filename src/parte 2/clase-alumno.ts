@@ -82,19 +82,24 @@ export class Alumno {
     // -------------------------------------------------------------------
 
     agregarMateria(materia: Materia): void {
-        // TODO
+        this.materias.push(materia);
         throw new Error("Implementar");
     }
 
     quitarMateria(codigo: number): Materia | undefined {
-        // TODO: quitar la materia con ese código y devolverla.
-        // Si no está inscripto en ninguna con ese código, devolver undefined.
-        throw new Error("Implementar");
+        const indice = this.materias.findIndex(materia => materia.codigo === codigo);
+        if (indice === -1) {
+            return undefined
+        }
+        const materiaEliminada = this.materias[indice]
+        this.materias.splice(indice, 1);
+        return materiaEliminada;
+    
     }
 
     estaInscripto(codigo: number): boolean {
-        // TODO
-        throw new Error("Implementar");
+        return this.materias.some(materia => materia.codigo === codigo);
+        
     }
 
     cantidadMaterias(): number {
