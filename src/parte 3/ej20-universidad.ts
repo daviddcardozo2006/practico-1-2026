@@ -20,8 +20,6 @@
  * solamente del lado de la materia.
  */
 
-import { get } from "http";
-
 export abstract class Persona {
     constructor(
         public legajo: number,
@@ -45,17 +43,31 @@ export class Materia {
 
     inscribirAlumno(alumno: Alumno): void {
         // TODO: agregar el alumno si no está ya inscripto (comparar por legajo).
-        throw new Error("Implementar");
+        const yaInscripto = this.alumnosInscriptos.some(a=> a.legajo === alumno.legajo)
+        if (yaInscripto){
+            throw new Error("Alumno ya inscripto.")
+        }
+        this.alumnosInscriptos.push(alumno)
     }
 
     quitarAlumno(alumno: Alumno): void {
-        // TODO: quitar el alumno de la lista, si está.
-        throw new Error("Implementar");
+        const index = this.alumnosInscriptos.findIndex(a => a.legajo === alumno.legajo);
+    
+    if (index === -1) {
+        throw new Error("El alumno no está inscripto en esta materia.");
+    }
+    
+    this.alumnosInscriptos.splice(index, 1);
+
     }
 
     asignarDocente(docente: Docente): void {
         // TODO: agregar el docente si no está ya asignado (comparar por legajo).
-        throw new Error("Implementar");
+        const yaAsignado= this.docentesAsignados.some(a=> a.legajo === docente.legajo)
+        if (yaAsignado){
+            throw new Error("Docente ya asignado.")
+        }
+        this.docentesAsignados.push(docente)
     }
 
     getAlumnosInscriptos(): Alumno[] {
@@ -76,9 +88,15 @@ export class Alumno extends Persona {
     }
 
     inscribirse(materia: Materia): void {
-        // TODO: agregar la materia a este alumno (si no estaba ya) y avisarle
-        // a la materia llamando a materia.inscribirAlumno(this).
-        throw new Error("Implementar");
+        const yaInscripto = this.materias.some(m => m.codigo === materia.codigo);
+    
+    if (yaInscripto) {
+        throw new Error("Ya estás inscripto en esta materia.");
+    }
+    
+    this.materias.push(materia);
+    materia.inscribirAlumno(this);
+        
     }
 
     quitarMateria(materia: Materia): void {
