@@ -27,7 +27,6 @@ export class Vehiculo {
 
 export class Auto extends Vehiculo {
     acelerar(): void {
-        // TODO: loguear (console.log) un mensaje que mencione "auto"
         console.log(`${this.marca} ${this.modelo}, el auto, está acelerando`);
     }
 }
