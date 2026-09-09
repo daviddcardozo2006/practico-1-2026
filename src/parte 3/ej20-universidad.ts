@@ -20,6 +20,8 @@
  * solamente del lado de la materia.
  */
 
+import { get } from "http";
+
 export abstract class Persona {
     constructor(
         public legajo: number,
@@ -57,7 +59,6 @@ export class Materia {
     }
 
     getAlumnosInscriptos(): Alumno[] {
-        // TODO: devolver una copia, no la referencia interna.
         throw new Error("Implementar");
     }
 
@@ -83,18 +84,23 @@ export class Alumno extends Persona {
     quitarMateria(materia: Materia): void {
         // TODO: quitar la materia de este alumno y avisarle a la materia
         // llamando a materia.quitarAlumno(this).
-        throw new Error("Implementar");
+        const indice = this.materias.findIndex(m => m.codigo ===  materia.codigo);
+        if (indice === -1){
+        this.materias.splice(indice, 1);
+        }
+        materia.quitarAlumno(this);
     }
 
     getMaterias(): Materia[] {
         // TODO: devolver una copia, no la referencia interna.
-        throw new Error("Implementar");
+        return[...this.materias];
     }
 
     obtenerInformacion(): string {
         // TODO: devolver un string que incluya nombre, apellido, legajo y
         // la cantidad de materias inscriptas, mencionando "Alumno".
-        throw new Error("Implementar");
+        return `Alumno : ${this.nombre}, ${this.apellido}, legajo: ${this.legajo}, ${this.email} Materias inscriptas: ${this.materias.length}`;
+    
     }
 }
 
@@ -118,13 +124,13 @@ export class Docente extends Persona {
     }
 
     getMateriasAsignadas(): Materia[] {
-        // TODO: devolver una copia, no la referencia interna.
-        throw new Error("Implementar");
+        return [...this.materiasAsignadas];
     }
 
     obtenerInformacion(): string {
         // TODO: devolver un string que incluya nombre, apellido, legajo y
         // especialidad, mencionando "Docente".
-        throw new Error("Implementar");
+        return `Docente: ${this.nombre} ${this.apellido} (legajo ${this.legajo}) - Especialidad: ${this.especialidad}`
+
     }
 }
