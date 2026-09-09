@@ -71,12 +71,13 @@ export class Materia {
     }
 
     getAlumnosInscriptos(): Alumno[] {
-        throw new Error("Implementar");
+        return [...this.alumnosInscriptos];
+
     }
 
     getDocentesAsignados(): Docente[] {
-        // TODO: devolver una copia, no la referencia interna.
-        throw new Error("Implementar");
+        return [...this.docentesAsignados];
+    
     }
 }
 
