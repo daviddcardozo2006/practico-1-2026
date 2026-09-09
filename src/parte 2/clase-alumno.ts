@@ -12,8 +12,7 @@
 // -----------------------------------------------------------------------------
 // EJERCICIO 10 - interface Materia
 // -----------------------------------------------------------------------------
-//TODO cambiar a type
-export interface Materia {
+export type Materia = {
     codigo: number;
     nombre: string;
     horas: number;
@@ -38,7 +37,13 @@ export class Alumno {
         edad: number,
         email: string
     ) {
-        // TODO (Ejercicio 8): asignar los atributos recibidos.
+        this.legajo = legajo;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.email = email;
+
+
         throw new Error("Implementar");
     }
 
@@ -47,7 +52,7 @@ export class Alumno {
     // -------------------------------------------------------------------
 
     getNombreCompleto(): string {
-        // TODO
+        return 
         throw new Error("Implementar");
     }
 
