@@ -8,57 +8,51 @@
  * sin saber de qué tipo concreto es.
  */
 export abstract class Figura {
-    abstract calcularArea(): number;
-    abstract calcularPerimetro(): number;
+  abstract calcularArea(): number;
+  abstract calcularPerimetro(): number;
 }
 
 export class Circulo extends Figura {
-    constructor(private radio: number) {
-        super();
-    }
+  constructor(private radio: number) {
+    super();
+  }
 
-    calcularArea(): number {
-        // TODO: área = π * radio²
-        throw new Error("Implementar");
-    }
+  calcularArea(): number {
+    return Math.PI * this.radio ** 2;
+  }
 
-    calcularPerimetro(): number {
-        // TODO: perímetro (circunferencia) = 2 * π * radio
-        throw new Error("Implementar");
-    }
+  calcularPerimetro(): number {
+    return Math.PI * 2 * this.radio;
+  }
 }
 
 export class Rectangulo extends Figura {
-    constructor(
-        private base: number,
-        private altura: number
-    ) {
-        super();
-    }
+  constructor(
+    private base: number,
+    private altura: number
+  ) {
+    super();
+  }
 
-    calcularArea(): number {
-        // TODO: área = base * altura
-        throw new Error("Implementar");
-    }
+  calcularArea(): number {
+    return this.base * this.altura;
+  }
 
-    calcularPerimetro(): number {
-        // TODO: perímetro = 2 * (base + altura)
-        throw new Error("Implementar");
-    }
+  calcularPerimetro(): number {
+    return this.base * 2 + this.altura * 2;
+  }
 }
 
 export class Cuadrado extends Figura {
-    constructor(private lado: number) {
-        super();
-    }
+  constructor(private lado: number) {
+    super();
+  }
 
-    calcularArea(): number {
-        // TODO: área = lado²
-        throw new Error("Implementar");
-    }
+  calcularArea(): number {
+    return this.lado ** 2;
+  }
 
-    calcularPerimetro(): number {
-        // TODO: perímetro = 4 * lado
-        throw new Error("Implementar");
-    }
+  calcularPerimetro(): number {
+    return this.lado * 4;
+  }
 }
