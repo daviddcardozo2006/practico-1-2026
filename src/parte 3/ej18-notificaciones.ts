@@ -5,35 +5,27 @@
  * sin importarle cuál es el tipo concreto.
  */
 export abstract class Notificacion {
-    abstract enviar(mensaje: string): void;
+  abstract enviar(mensaje: string): void;
 }
 
 export class NotificacionEmail extends Notificacion {
-    enviar(mensaje: string): void {
-        // TODO: informar por consola (console.log) que se envía un email
-        // con ese mensaje (mencionar "email").
-        throw new Error("Implementar");
-    }
+  enviar(mensaje: string): void {
+    console.log(`Mail enviado: '${mensaje}'`);
+  }
 }
 
 export class NotificacionSMS extends Notificacion {
-    enviar(mensaje: string): void {
-        // TODO: idem, mencionando "SMS"
-        throw new Error("Implementar");
-    }
+  enviar(mensaje: string): void {
+    console.log(`SMS enviado: '${mensaje}'`);
+  }
 }
 
 export class NotificacionPush extends Notificacion {
-    enviar(mensaje: string): void {
-        // TODO: idem, mencionando "push"
-        throw new Error("Implementar");
-    }
+  enviar(mensaje: string): void {
+    console.log(`Notificación Push enviada: '${mensaje}'`);
+  }
 }
 
-export function enviarNotificaciones(
-    notificaciones: Notificacion[],
-    mensaje: string
-): void {
-    // TODO: enviar el mensaje a través de cada notificación recibida.
-    throw new Error("Implementar");
+export function enviarNotificaciones(notificaciones: Notificacion[], mensaje: string): void {
+  notificaciones.forEach((n) => n.enviar(mensaje));
 }

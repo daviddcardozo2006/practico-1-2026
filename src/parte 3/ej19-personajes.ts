@@ -9,32 +9,44 @@
  * La vida de quien recibe el ataque nunca debe bajar de 0.
  */
 export abstract class Personaje {
-    constructor(
-        public nombre: string,
-        public vida: number,
-        public ataque: number
-    ) {}
+  constructor(
+    public nombre: string,
+    public vida: number,
+    public ataque: number
+  ) { }
 
-    abstract atacar(objetivo: Personaje): void;
+  abstract atacar(objetivo: Personaje): void;
 }
 
 export class Guerrero extends Personaje {
-    atacar(objetivo: Personaje): void {
-        // TODO: aplicar daño = this.ataque a objetivo.vida (sin bajar de 0)
-        throw new Error("Implementar");
+  atacar(objetivo: Personaje): void {
+    let daño = this.ataque;
+    if (objetivo.vida - daño < 0) {
+      objetivo.vida = 0;
+    } else {
+      objetivo.vida -= daño;
     }
+  }
 }
 
 export class Mago extends Personaje {
-    atacar(objetivo: Personaje): void {
-        // TODO: aplicar daño = Math.round(this.ataque * 1.5)
-        throw new Error("Implementar");
+  atacar(objetivo: Personaje): void {
+    let daño = Math.round(this.ataque * 1.5);
+    if (objetivo.vida - daño < 0) {
+      objetivo.vida = 0;
+    } else {
+      objetivo.vida -= daño;
     }
+  }
 }
 
 export class Arquero extends Personaje {
-    atacar(objetivo: Personaje): void {
-        // TODO: aplicar daño = Math.round(this.ataque * 0.8)
-        throw new Error("Implementar");
+  atacar(objetivo: Personaje): void {
+    let daño = Math.round(this.ataque * 0.8);
+    if (objetivo.vida - daño < 0) {
+      objetivo.vida = 0;
+    } else {
+      objetivo.vida -= daño;
     }
+  }
 }
