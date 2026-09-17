@@ -44,7 +44,7 @@ export class Alumno {
         this.email = email;
 
 
-        throw new Error("Implementar");
+        
     }
 
     // -------------------------------------------------------------------
@@ -52,8 +52,7 @@ export class Alumno {
     // -------------------------------------------------------------------
 
     getNombreCompleto(): string {
-        return this.nombre, this.apellido
-        
+    return `${this.nombre} ${this.apellido}`;
     }
 
     esMayorDeEdad(): boolean {
@@ -80,7 +79,7 @@ export class Alumno {
         else{
             this.edad = edad;
         }
-        throw new Error("Implementar");
+        
     }
 
     // -------------------------------------------------------------------
@@ -89,7 +88,7 @@ export class Alumno {
 
     agregarMateria(materia: Materia): void {
         this.materias.push(materia);
-        throw new Error("Implementar");
+        
     }
 
     quitarMateria(codigo: number): Materia | undefined {

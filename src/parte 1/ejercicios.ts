@@ -47,7 +47,7 @@ export function obtenerNombresCompletos(alumnos: Alumno[]): string[] {
 // -----------------------------------------------------------------------------
 // Devolver solamente los alumnos que tengan 18 años o más.
 export function obtenerMayoresDeEdad(alumnos: Alumno[]): Alumno[] {
-  return alumnos.filter(n => n.edad > 18);
+  return alumnos.filter(n => n.edad >= 18);
 }
 
 // -----------------------------------------------------------------------------
@@ -56,7 +56,7 @@ export function obtenerMayoresDeEdad(alumnos: Alumno[]): Alumno[] {
 // Un alumno aprueba cuando su nota es mayor o igual a 6.
 // Devolver los alumnos aprobados.
 export function obtenerAprobados(alumnos: Alumno[]): Alumno[] {
-  return alumnos.filter(n => n.edad >= 6);
+  return alumnos.filter(n => n.nota >= 6);
 }
 
 // -----------------------------------------------------------------------------
@@ -73,7 +73,7 @@ export function calcularPromedio(alumnos: Alumno[]): number {
 
   const sumaTotal = alumnos.reduce((acc, alumno) => acc + alumno.nota, 0);
   return sumaTotal / alumnos.length;
-  throw new Error("Implementar");
+  
 }
 
 // -----------------------------------------------------------------------------

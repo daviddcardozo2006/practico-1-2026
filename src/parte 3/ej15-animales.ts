@@ -49,5 +49,5 @@ export function hacerSonidos(animales: Animal[]): void {
     for (const animal of animales) {
         console.log(`Nombre: ${animal.nombre}, Sonido:${animal.hacerSonido()}`);
     } 
-    throw new Error("Implementar");
+    
 }
