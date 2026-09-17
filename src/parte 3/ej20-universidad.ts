@@ -44,7 +44,7 @@ export class Materia {
   inscribirAlumno(alumno: Alumno): void {
     const yaInscripto = this.alumnosInscriptos.some(a => a.legajo === alumno.legajo)
     if (yaInscripto) {
-      throw new Error("Alumno ya inscripto.")
+      return;
     }
     this.alumnosInscriptos.push(alumno)
   }
@@ -63,7 +63,7 @@ export class Materia {
   asignarDocente(docente: Docente): void {
     const yaAsignado = this.docentesAsignados.some(a => a.legajo === docente.legajo)
     if (yaAsignado) {
-      throw new Error("Docente ya asignado.")
+      return;
     }
     this.docentesAsignados.push(docente)
   }
@@ -90,8 +90,9 @@ export class Alumno extends Persona {
     const yaInscripto = this.materias.some(m => m.codigo === materia.codigo);
 
     if (yaInscripto) {
-      throw new Error("Ya estás inscripto en esta materia.");
+      return;
     }
+
 
     this.materias.push(materia);
     materia.inscribirAlumno(this);
@@ -131,7 +132,6 @@ export class Docente extends Persona {
   asignarMateria(materia: Materia): void {
     const yaAsignado = this.materiasAsignadas.some(m => m.codigo === materia.codigo);
     if (yaAsignado) {
-      throw new Error("Materia ya asignada.")
     }
     this.materiasAsignadas.push(materia);
     materia.asignarDocente(this);

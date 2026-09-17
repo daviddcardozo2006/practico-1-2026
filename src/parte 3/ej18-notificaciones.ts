@@ -10,7 +10,7 @@ export abstract class Notificacion {
 
 export class NotificacionEmail extends Notificacion {
   enviar(mensaje: string): void {
-    console.log(`Mail enviado: '${mensaje}'`);
+    console.log(`Email enviado: '${mensaje}'`);
   }
 }
 
